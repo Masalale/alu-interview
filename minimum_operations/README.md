@@ -22,6 +22,29 @@ This problem is equivalent to finding the **sum of all prime factors** of `n`. H
    - Any composite factor can be further broken down
    - Prime factors give the minimal sum
 
+## Current Implementation
+
+The streamlined solution in `0-minoperations.py`:
+
+```python
+def minOperations(n):
+    if n < 2:
+        return 0
+    ops = 0
+    factor = 2
+    while n > 1:
+        while n % factor == 0:
+            ops += factor
+            n //= factor
+        factor += 1
+    return ops
+```
+
+This implementation:
+- Uses `n < 2` instead of `n <= 1` for clarity
+- Increments factor by 1 each time for simplicity
+- Efficiently finds all prime factors without optimization checks
+
 ## Example Walkthrough (n = 9)
 
 - `9 = 3 × 3`
@@ -39,6 +62,11 @@ Step by step:
 - **Space**: O(1) - constant space usage
 
 ## Edge Cases
-- `n ≤ 1`: Return 0 (impossible or already achieved)
+- `n < 2`: Return 0 (impossible or already achieved)
 - `n` is prime: Return `n` (copy 1, paste n-1 times)
 - `n` is composite: Sum of all prime factors
+
+## Algorithm Analysis
+- **Correctness**: The algorithm correctly finds all prime factors by trial division
+- **Efficiency**: While not optimized with `factor * factor <= n`, it's still efficient for reasonable inputs
+- **Simplicity**: The linear increment of factor makes the code more readable and maintainable
