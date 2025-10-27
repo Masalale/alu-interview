@@ -1,4 +1,4 @@
-
+#!/usr/bin/python3
 """Calculate how much rainwater is retained between walls.
 
 Prototype: def rain(walls)
