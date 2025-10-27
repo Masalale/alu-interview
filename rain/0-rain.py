@@ -1,97 +1,19 @@
 #!/usr/bin/python3
-"""Calculate how much rainwater is retained between walls.
-
-Prototype: def rain(walls)
-walls is a list of non-negative integers.
-Return: Integer indicating total amount of rainwater retained.
-
-This implementation uses the two-pointer technique with O(n) time and O(1) extra space.
+"""calculates how much rain will be trapped after it rains
 """
 
-from typing import List
 
+def rain(walls):
+    """calculates how much rain will be trapped after it rains
+    """
+    if not walls or len(walls) < 3:
+        return 0
 
-def rain(walls: List[int]) -> int:
-	if not walls:
-		return 0
-
-	left, right = 0, len(walls) - 1
-	left_max, right_max = 0, 0
-	water = 0
-
-	while left < right:
-		if walls[left] <= walls[right]:
-			if walls[left] >= left_max:
-				left_max = walls[left]
-			else:
-				water += left_max - walls[left]
-			left += 1
-		else:
-			if walls[right] >= right_max:
-				right_max = walls[right]
-			else:
-				water += right_max - walls[right]
-			right -= 1
-
-	return water
-
-
-if __name__ == "__main__":
-	#!/usr/bin/python3
-	"""0-rain module
-
-	Implements a function that calculates how much rainwater is retained
-	given a list of non-negative integers representing wall heights.
-	"""
-
-
-	def rain(walls):
-		"""Return total units of rainwater retained.
-
-		Args:
-			walls (list): list of non-negative integers representing wall heights
-
-		Returns:
-			int: total amount of water retained
-		"""
-		if not walls:
-			return 0
-
-		left, right = 0, len(walls) - 1
-		left_max, right_max = 0, 0
-		water = 0
-
-		while left < right:
-			if walls[left] <= walls[right]:
-				if walls[left] >= left_max:
-					left_max = walls[left]
-				else:
-					water += left_max - walls[left]
-				left += 1
-			else:
-				if walls[right] >= right_max:
-					right_max = walls[right]
-				else:
-					water += right_max - walls[right]
-				right -= 1
-
-		return water
-
-
-	if __name__ == "__main__":
-		# Quick manual tests (compatible with Python 3.4+)
-		tests = [
-			([], 0),
-			([0], 0),
-			([1, 1, 1], 0),
-			([3, 0, 0, 2, 0, 4], 10),
-			([0, 3, 0, 1, 0, 2], 5),
-			([4, 2, 0, 3, 2, 5], 9),
-			([5, 4, 1, 2], 1),
-		]
-
-		for i, (inp, expected) in enumerate(tests, 1):
-			out = rain(inp)
-			ok = out == expected
-			print("Test {}: input={} -> expected={}, got={} -> {}".format(
-				i, inp, expected, out, "PASS" if ok else "FAIL"))
+    rain = 0
+    for i in range(1, len(walls) - 1):
+        left = max(walls[:i])
+        right = max(walls[i + 1:])
+        min_wall = min(left, right)
+        if walls[i] < min_wall:
+            rain += min_wall - walls[i]
+    return rain
