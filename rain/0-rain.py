@@ -38,11 +38,22 @@ def rain(walls: List[int]) -> int:
 
 if __name__ == "__main__":
 	#!/usr/bin/python3
+	"""0-rain module
 
-	from typing import List
+	Implements a function that calculates how much rainwater is retained
+	given a list of non-negative integers representing wall heights.
+	"""
 
 
-	def rain(walls: List[int]) -> int:
+	def rain(walls):
+		"""Return total units of rainwater retained.
+
+		Args:
+			walls (list): list of non-negative integers representing wall heights
+
+		Returns:
+			int: total amount of water retained
+		"""
 		if not walls:
 			return 0
 
@@ -68,7 +79,7 @@ if __name__ == "__main__":
 
 
 	if __name__ == "__main__":
-		# Quick manual tests
+		# Quick manual tests (compatible with Python 3.4+)
 		tests = [
 			([], 0),
 			([0], 0),
@@ -82,4 +93,5 @@ if __name__ == "__main__":
 		for i, (inp, expected) in enumerate(tests, 1):
 			out = rain(inp)
 			ok = out == expected
-			print(f"Test {i}: input={inp} -> expected={expected}, got={out} -> {'PASS' if ok else 'FAIL'}")
+			print("Test {}: input={} -> expected={}, got={} -> {}".format(
+				i, inp, expected, out, "PASS" if ok else "FAIL"))
