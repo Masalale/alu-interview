@@ -12,14 +12,6 @@ from typing import List
 
 
 def rain(walls: List[int]) -> int:
-	"""Return amount of rainwater retained given wall heights list.
-
-	Args:
-		walls: list of non-negative integers
-
-	Returns:
-		int: total units of water retained
-	"""
 	if not walls:
 		return 0
 
